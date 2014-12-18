@@ -1,8 +1,14 @@
 $(function() {
 	
+	// Use $ for object vars:
 	var image = {};
 	var device = {};
 	var grid = {};
+	var position = [];
+	var $box = $('<div />', { 'class': 'box' })
+		.hide()
+		.appendTo('body');
+	var count = 0;
 	
 	$('<img />', {
 		src: 'test.jpg'
@@ -13,6 +19,9 @@ $(function() {
 		var i;
 		var x;
 		var audio;
+		var func;
+		var temp = [];
+		var timer = 0;
 		
 		console.log('Success!', $this);
 		
@@ -34,42 +43,60 @@ $(function() {
 		
 		for (i = 0; i < grid.rows; i++) {
 			
-			console.warn('row', i + 1, !((i + 1) % 2))
+			console.warn('row', i + 1, ( ! ((i + 1) % 2)))
 			
 			for (x = 0; x < grid.cols; x++) {
 				
+				func = (( ! ((i + 1) % 2)) ? 'unshift' : 'push');
+				
+				console.log(func);
+				
 				console.log((x * device.width), (i * device.height));
 				
-				$('<div />', { 'class': 'box' })
-					.css({
-						width: device.width,
-						height: device.height,
-						backgroundPosition: ('-' + (x * device.width) + 'px -' + (i * device.height) + 'px')
-					})
-					.hide()
-					.appendTo('body');
+				temp[func]('-' + (x * device.width) + 'px -' + (i * device.height) + 'px');
+				
+				console.log('temp', temp);
 				
 			}
 			
+			$.merge(position, temp);
+			temp = []; // Reset temp.
+			
 		}
+		
+		console.log('foo', position);
 		
 		$audio = $('<audio />')
 			.append('<source src="beep.ogg" type="audio/ogg">')
 			.append('<source src="beep.mp3" type="audio/mpeg">')
 			.appendTo('body');
 		
-		$('div:first').show();
+		$box.show();
 		
-		setInterval(function() {
-			$('div:first')
-				.hide()
-				.next()
-				.show(0, '', function() {
-					$audio[0].play();
+		(function timeout() {
+			
+			$box
+				.css({
+					backgroundPosition: position[count]
 				})
-				.end()
-				.appendTo('body');
-		}, 3000);
+			
+			$audio[0].play();
+			
+			count++; // Skip `-0px -0px` as that's default.
+			
+			console.log(count, grid.total);
+			
+			if (count == grid.total) {
+				
+				clearTimeout(timer);
+				
+			} else {
+				
+				timer = setTimeout(timeout, 3000);
+				
+			}
+			
+		})();
 		
 	})
 	.one('error', function() {

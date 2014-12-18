@@ -149,6 +149,8 @@ $(function() {
 	
 	$(document).one('touchstart click', function() {
 		
+		console.log('Go!');
+		
 		$audio1
 			.trigger('play')
 			.trigger('pause');

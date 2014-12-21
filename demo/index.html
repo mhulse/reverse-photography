@@ -32,6 +32,7 @@
 		}
 		
 		form {
+			display: none;
 			position: absolute;
 			z-index: 2;
 			top: 50%;
@@ -65,7 +66,6 @@
 		}
 		
 		#picture {
-			xbackground-image: url(test.jpg);
 			background-repeat: no-repeat;
 			position: absolute;
 			width: 100%;
@@ -93,24 +93,14 @@
 		
 		<div><label>Image scale: <input id="scale" type="text" name="scale" value="1" placeholder="(…, .5, 1, 1.5, 2, …)"></label></div>
 		
-		<div>
-			<label>Photo: <input type="button" id="upload-btn" class="btn btn-large clearfix" value="Choose file"></label>
-			<br>
-			<span style="padding-left:5px;vertical-align:middle;"><i>PNG, JPG, or GIF (500K max file size)</i></span>
-		</div>
+		<div><label>Photo: <input id="file" type="file"></label></div>
 		
-		<div id="errormsg" class="clearfix redtext"></div>
-		
-		<div id="pic-progress-wrap" class="progress-wrap" style="margin-top:10px;margin-bottom:10px;"></div>
-		
-		<!-- <button type="submit" onclick="return false;">Submit</button> -->
+		<button type="submit">Submit</button>
 		
 	</form>
 	
 	<script src="jquery.min.js"></script>
-	<script src="SimpleAjaxUploader.min.js"></script>
 	<script src="splice.js"></script>
-	<script></script>
 	
 </body>
 </html>

@@ -2,7 +2,7 @@ $(function() {
 	
 	// Use $ for object vars:
 	var image = {};
-	//var file = '';
+	var upload;
 	var device = {};
 	var grid = {};
 	var position = [];
@@ -10,6 +10,7 @@ $(function() {
 	var pause = 3000;
 	var exposure = 400;
 	var scale = 1;
+	var $form;
 	var $picture = $('<div />', { 'id': 'picture' })
 		.hide()
 		.appendTo('body');
@@ -24,10 +25,10 @@ $(function() {
 		.append('<source src="beep2.mp3" type="audio/mpeg">')
 		.append('<source src="beep2.ogg" type="audio/ogg">')
 		.appendTo('body');
-	var begin = function(file) {
+	var begin = function() {
 		
 		$('<img />', {
-			src: 'includes/uploads/' + file
+			src: upload
 		})
 		.one('load', function() {
 			
@@ -96,7 +97,7 @@ $(function() {
 			
 			$picture
 				.css({
-					backgroundImage: 'url(includes/uploads/' + file + ')'
+					backgroundImage: 'url(' + upload + ')'
 				})
 				.show();
 			
@@ -126,9 +127,9 @@ $(function() {
 					clearTimeout(timer);
 					
 					// Restart:
-					$(document).one('touchstart click', function() {
-						begin(file);
-					});
+					// $(document).one('touchstart click', function() {
+					// 	begin(file);
+					// });
 					
 				} else {
 					
@@ -161,12 +162,14 @@ $(function() {
 	};
 	
 	//$(document).one('touchstart click', function() {
-	//$('form').one('click', 'button', function() {
-	var init = function(file) {
+	$('form').one('click', 'button', function($e) {
+	//var init = function(file) {
 		
 		//var $this = $(this);
 		
 		console.log('Go!');
+		
+		$e.preventDefault();
 		
 		// Hack to enable audio on iOS:
 		$audio1
@@ -177,14 +180,82 @@ $(function() {
 			.trigger('play')
 			.trigger('pause');
 		
-		$('form')
+		$form
 			.fadeOut(function() {
 				
-				begin(file);
+				begin();
 				
 			});
 		
-	};
-	//});
+	//};
+	});
+	
+	if (window.File || window.FileReader || window.FileList || window.Blob) {
+		
+		$form = $('form');
+		
+		$form.fadeIn();
+		
+		$('input[type="file"]')
+			.change(function() {
+				
+				var $this = $(this);
+				var files;
+				var reader;
+					
+				if ($this.length) {
+					
+					files = $this[0].files;
+					
+					if (files) {
+						
+						file = files[0];
+						
+						if (file) {
+							
+							reader = new FileReader();
+							reader.onload = function($e) {
+								
+								console.log('reader.onload', reader.result);
+								
+								upload = reader.result;
+								
+								//init(reader.result);
+								
+								//alert(reader.result);
+								
+							};
+							reader.onerror = function ($e) {
+								
+								alert('error ' + $e.target.error.code + "\n\n" + 'iPhone iOS8 Permissions Error!');
+								
+							};
+							reader.readAsDataURL(file);
+							
+						} else {
+							
+							console.log('Please select a file before clicking "Load"');
+							
+						}
+						
+					} else {
+						
+						console.log('This browser doesn not seem to support the `files` property of file inputs.')
+						
+					}
+					
+				} else {
+					
+					console.log('Could not find the file `input` element.');
+					
+				}
+				
+			});
+		
+	} else {
+		
+		console.log('The File APIs are not fully supported in this browser.');
+		
+	}
 	
 });

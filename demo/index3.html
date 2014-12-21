@@ -9,53 +9,18 @@
 	<meta name="description" content="">
 	<meta name="keywords" content="">
 	
-	<style></style>
-	
 </head>
 <body>
 	
-	<article>
-		<p><input type=file></p>
-		<p>Select an image from your machine to read the contents of the file without using a server</p>
-		<div id="holder"></div>
-	</article>
+	<input id="file" type="file">
 	
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	
 	<script>
 		
 		$(document).ready(function() {
-			
-			var upload = document.getElementsByTagName('input')[0],
-			    holder = document.getElementById('holder'),
-			    state = document.getElementById('status');
 
-			if (typeof window.FileReader === 'undefined') {
-			  console.log('File API & FileReader not available');
-			} else {
-			  state.className = 'success';
-			  state.innerHTML = 'File API & FileReader available';
-			}
-			 
-			upload.onchange = function (e) {
-			  e.preventDefault();
 
-			  var file = upload.files[0],
-			      reader = new FileReader();
-			  reader.onload = function (event) {
-			    var img = new Image();
-			    img.src = event.target.result;
-			    // note: no onload required since we've got the dataurl...I think! :)
-			    if (img.width > 560) { // holder width
-			      img.width = 560;
-			    }
-			    holder.innerHTML = '';
-			    holder.appendChild(img);
-			  };
-			  reader.readAsDataURL(file);
-
-			  return false;
-			};
 			
 			
 		});

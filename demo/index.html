@@ -13,25 +13,66 @@
 	
 	<style>
 		
+		*,
+		*::before,
+		*::after {
+			-webkit-box-sizing: border-box;
+			   -moz-box-sizing: border-box;
+					box-sizing: border-box;
+		}
+		
 		* { margin: 0; padding: 0; }
 		html { height: 100%; }
 		body {
 			font-family: sans-serif;
-			font-size: 16px;
-			color: red;
+			font-size: 20px;
+			color: #fff;
 			min-height: 100%;
 			background: #000;
 		}
 		
-		.picture {
-			background-image: url(test.jpg);
+		form {
+			position: absolute;
+			z-index: 2;
+			top: 50%;
+			left: 50%;
+			-webkit-transform: translate(-50%, -50%);
+			   -moz-transform: translate(-50%, -50%);
+				-ms-transform: translate(-50%, -50%);
+				 -o-transform: translate(-50%, -50%);
+					transform: translate(-50%, -50%);
+		}
+		
+		form > :first-child { margin-top: 0; }
+		form > :last-child { margin-bottom: 0; }
+		
+		form div {
+			margin: 10px 0;
+		}
+		
+		form input[type="text"] {
+			font-size: inherit;
+			width: 100%;
+			margin-top: 3px;
+			padding: 10px;
+			display: block;
+		}
+		
+		form button {
+			font-size: inherit;
+			display: block;
+			width: 100%;
+		}
+		
+		#picture {
+			xbackground-image: url(test.jpg);
 			background-repeat: no-repeat;
 			position: absolute;
 			width: 100%;
 			height: 100%;
 		}
 		
-		.shutter {
+		#shutter {
 			background: #000;
 			width: 100%;
 			height: 100%;
@@ -44,7 +85,30 @@
 </head>
 <body>
 	
+	<form>
+		
+		<div><label>Time between exposures: <input id="pause" type="text" name="pause" value="3000" placeholder="(in milliseconds)"></label></div>
+		
+		<div><label>Exposure time: <input id="exposure" type="text" name="exposure" value="400" placeholder="(in milliseconds)"></label></div>
+		
+		<div><label>Image scale: <input id="scale" type="text" name="scale" value="1" placeholder="(…, .5, 1, 1.5, 2, …)"></label></div>
+		
+		<div>
+			<label>Photo: <input type="button" id="upload-btn" class="btn btn-large clearfix" value="Choose file"></label>
+			<br>
+			<span style="padding-left:5px;vertical-align:middle;"><i>PNG, JPG, or GIF (500K max file size)</i></span>
+		</div>
+		
+		<div id="errormsg" class="clearfix redtext"></div>
+		
+		<div id="pic-progress-wrap" class="progress-wrap" style="margin-top:10px;margin-bottom:10px;"></div>
+		
+		<!-- <button type="submit" onclick="return false;">Submit</button> -->
+		
+	</form>
+	
 	<script src="jquery.min.js"></script>
+	<script src="SimpleAjaxUploader.min.js"></script>
 	<script src="splice.js"></script>
 	<script></script>
 	

@@ -2,14 +2,18 @@ $(function() {
 	
 	// Use $ for object vars:
 	var image = {};
+	//var file = '';
 	var device = {};
 	var grid = {};
 	var position = [];
 	var clips = [];
-	var $picture = $('<div />', { 'class': 'picture' })
+	var pause = 3000;
+	var exposure = 400;
+	var scale = 1;
+	var $picture = $('<div />', { 'id': 'picture' })
 		.hide()
 		.appendTo('body');
-	var $shutter = $('<div />', { 'class': 'shutter' })
+	var $shutter = $('<div />', { 'id': 'shutter' })
 		.appendTo('body');
 	var count = 0;
 	var $audio1 = $('<audio />')
@@ -20,10 +24,10 @@ $(function() {
 		.append('<source src="beep2.mp3" type="audio/mpeg">')
 		.append('<source src="beep2.ogg" type="audio/ogg">')
 		.appendTo('body');
-	var begin = function() {
+	var begin = function(file) {
 		
 		$('<img />', {
-			src: 'test.jpg'
+			src: 'includes/uploads/' + file
 		})
 		.one('load', function() {
 			
@@ -90,7 +94,11 @@ $(function() {
 			
 			console.log('foo', position.length, clips.length, clips);
 			
-			$picture.show();
+			$picture
+				.css({
+					backgroundImage: 'url(includes/uploads/' + file + ')'
+				})
+				.show();
 			
 			(function timeout() {
 				
@@ -116,6 +124,11 @@ $(function() {
 				if (count == grid.total) {
 					
 					clearTimeout(timer);
+					
+					// Restart:
+					$(document).one('touchstart click', function() {
+						begin(file);
+					});
 					
 				} else {
 					
@@ -147,10 +160,15 @@ $(function() {
 		
 	};
 	
-	$(document).one('touchstart click', function() {
+	//$(document).one('touchstart click', function() {
+	//$('form').one('click', 'button', function() {
+	var init = function(file) {
+		
+		//var $this = $(this);
 		
 		console.log('Go!');
 		
+		// Hack to enable audio on iOS:
 		$audio1
 			.trigger('play')
 			.trigger('pause');
@@ -159,8 +177,14 @@ $(function() {
 			.trigger('play')
 			.trigger('pause');
 		
-		begin();
+		$('form')
+			.fadeOut(function() {
+				
+				begin(file);
+				
+			});
 		
-	});
+	};
+	//});
 	
 });

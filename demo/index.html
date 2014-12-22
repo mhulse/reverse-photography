@@ -65,6 +65,8 @@
 			width: 100%;
 		}
 		
+		form button { display: none; }
+		
 		#picture {
 			background-repeat: no-repeat;
 			position: absolute;
@@ -80,12 +82,17 @@
 			z-index: 1;
 		}
 		
+		.finger {
+			cursor: pointer;
+			cursor: hand;
+		}
+		
 	</style>
 	
 </head>
 <body>
 	
-	<form>
+	<form method="post">
 		
 		<div><label>Time between exposures: <input id="pause" type="text" name="pause" value="3000" placeholder="(in milliseconds)"></label></div>
 		

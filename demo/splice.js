@@ -10,13 +10,13 @@ $(function() {
 	var pause = 3000;
 	var exposure = 400;
 	var scale = 1;
-	var $form;
+	var $form = $('form');
+	var $button = $('form').find('button');
 	var $picture = $('<div />', { 'id': 'picture' })
 		.hide()
 		.appendTo('body');
 	var $shutter = $('<div />', { 'id': 'shutter' })
 		.appendTo('body');
-	var count = 0;
 	var $audio1 = $('<audio />')
 		.append('<source src="beep1.mp3" type="audio/mpeg">')
 		.append('<source src="beep1.ogg" type="audio/ogg">')
@@ -38,11 +38,12 @@ $(function() {
 			var func;
 			var temp = [];
 			var timer = 0;
+			var count = 0;
 			
 			console.log('Success!', $this);
 			
-			image.width = this.width;
-			image.height = this.height;
+			image.width = (this.width * scale);
+			image.height = (this.height * scale);
 			
 			console.log('Image:', image.width, image.height);
 			
@@ -97,7 +98,8 @@ $(function() {
 			
 			$picture
 				.css({
-					backgroundImage: 'url(' + upload + ')'
+					backgroundImage: 'url(' + upload + ')',
+					backgroundSize: image.width + 'px ' + image.height + 'px'
 				})
 				.show();
 			
@@ -114,26 +116,32 @@ $(function() {
 				
 				count++; // Skip `-0px -0px` as that's default.
 				
-				console.log(count, grid.total);
+				console.log('count and grid total:', count, grid.total);
 				
 				$shutter
-					.delay(2500)
+					.delay(pause - exposure)
 					.hide(0)
-					.delay(400)
+					.delay(exposure)
 					.show(0);
 				
 				if (count == grid.total) {
 					
 					clearTimeout(timer);
 					
+					$('body').addClass('finger');
+					
 					// Restart:
-					// $(document).one('touchstart click', function() {
-					// 	begin(file);
-					// });
+					$(document).one('touchstart click', function() {
+						
+						$('body').removeClass('finger');
+						
+						begin(file);
+						
+					});
 					
 				} else {
 					
-					timer = setTimeout(timeout, 3000);
+					timer = setTimeout(timeout, (pause + exposure + 100)); // `100` = Fudge factor (i.e., extra time to prevent timing discrepancies between `setTimeout and `delay()`).
 					
 				}
 				
@@ -161,9 +169,7 @@ $(function() {
 		
 	};
 	
-	//$(document).one('touchstart click', function() {
-	$('form').one('click', 'button', function($e) {
-	//var init = function(file) {
+	$button.click(function($e) {
 		
 		//var $this = $(this);
 		
@@ -187,12 +193,11 @@ $(function() {
 				
 			});
 		
-	//};
 	});
 	
 	if (window.File || window.FileReader || window.FileList || window.Blob) {
 		
-		$form = $('form');
+		$form[0].reset();
 		
 		$form.fadeIn();
 		
@@ -220,9 +225,7 @@ $(function() {
 								
 								upload = reader.result;
 								
-								//init(reader.result);
-								
-								//alert(reader.result);
+								$button.fadeIn();
 								
 							};
 							reader.onerror = function ($e) {

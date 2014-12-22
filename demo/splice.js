@@ -20,10 +20,12 @@ $(function() {
 	var $audio1 = $('<audio />')
 		.append('<source src="beep1.mp3" type="audio/mpeg">')
 		.append('<source src="beep1.ogg" type="audio/ogg">')
+		.prop('volume', 0)
 		.appendTo('body');
 	var $audio2 = $('<audio />')
 		.append('<source src="beep2.mp3" type="audio/mpeg">')
 		.append('<source src="beep2.ogg" type="audio/ogg">')
+		.prop('volume', 0)
 		.appendTo('body');
 	var begin = function() {
 		
@@ -116,15 +118,24 @@ $(function() {
 				
 				console.log('clips count', count);
 				
-				count++; // Skip `-0px -0px` as that's default.
+				console.log('XXXXXXXX audio play:', clips[count]);
 				
-				if (count > 1) {
+				if (count != 0) {
 					
-					console.log('audio play:', clips[count]);
+					// This avoids the autoplay hackiness:
+					if (count == 1) {
+						
+						// Up the volume after the first frame:
+						clips[count].prop('volume', 1);
+						
+					}
 					
+					// Play if not first count:
 					clips[count].trigger('play');
 					
 				}
+				
+				count++; // Skip `-0px -0px` as that's default.
 				
 				console.log('count and grid total:', count, grid.total);
 				
@@ -191,7 +202,7 @@ $(function() {
 		
 	};
 	
-	$button.click(function($e) {
+	$button.one('touchstart click', function($e) {
 		
 		//var $this = $(this);
 		

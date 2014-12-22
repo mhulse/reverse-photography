@@ -7,7 +7,7 @@ $(function() {
 	var grid = {};
 	var position = [];
 	var clips = [];
-	var pause = 3000;
+	var pause = 3000; // Must not be lower than `exposure` value.
 	var exposure = 400;
 	var scale = 1;
 	var $form = $('form');
@@ -52,8 +52,8 @@ $(function() {
 			
 			console.log('Device:', device.width, device.height);
 			
-			grid.cols = Math.ceil(this.width / device.width); // Make image.width
-			grid.rows = Math.ceil(this.height / device.height);
+			grid.cols = Math.ceil(image.width / device.width);
+			grid.rows = Math.ceil(image.height / device.height);
 			grid.total = (grid.cols * grid.rows);
 			
 			console.log('Grid:', grid.cols, grid.rows, grid.total);
@@ -94,7 +94,9 @@ $(function() {
 				
 			}
 			
-			console.log('foo', position.length, clips.length, clips);
+			console.log('position', position.length, position);
+			
+			console.log('clips', clips.length, clips);
 			
 			$picture
 				.css({
@@ -105,6 +107,8 @@ $(function() {
 			
 			(function timeout() {
 				
+				console.log(position[count]);
+				
 				$picture
 					.css({
 						backgroundPosition: position[count]
@@ -112,9 +116,15 @@ $(function() {
 				
 				console.log('clips count', count);
 				
-				clips[count].trigger('play');
-				
 				count++; // Skip `-0px -0px` as that's default.
+				
+				if (count > 1) {
+					
+					console.log('audio play:', clips[count]);
+					
+					clips[count].trigger('play');
+					
+				}
 				
 				console.log('count and grid total:', count, grid.total);
 				
@@ -140,6 +150,8 @@ $(function() {
 					});
 					
 				} else {
+					
+					console.log('TIMER', pause + exposure + 100)
 					
 					timer = setTimeout(timeout, (pause + exposure + 100)); // `100` = Fudge factor (i.e., extra time to prevent timing discrepancies between `setTimeout and `delay()`).
 					
@@ -169,6 +181,16 @@ $(function() {
 		
 	};
 	
+	var values = function() {
+		
+		pause = parseInt($('#pause').val(), 10);
+		exposure = parseInt($('#exposure').val(), 10);
+		scale = parseInt($('#scale').val(), 10);
+		
+		console.log('pause:', pause, 'exposure:', exposure, 'scale:', scale)
+		
+	};
+	
 	$button.click(function($e) {
 		
 		//var $this = $(this);
@@ -185,6 +207,8 @@ $(function() {
 		$audio2
 			.trigger('play')
 			.trigger('pause');
+		
+		values();
 		
 		$form
 			.fadeOut(function() {

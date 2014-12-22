@@ -3,9 +3,10 @@
 <head>
 	
 	<meta charset="utf-8">
-	<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimal-ui">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="apple-mobile-web-app-title" content="Pic">
 	
 	<title></title>
 	<meta name="description" content="">
@@ -68,6 +69,9 @@
 		form button { display: none; }
 		
 		#picture {
+			background-position: 0 0;
+			background-origin: content-box;
+			background-attachment: local;
 			background-repeat: no-repeat;
 			position: absolute;
 			width: 100%;

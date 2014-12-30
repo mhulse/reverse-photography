@@ -37,8 +37,11 @@ This app/idea is still a work in progress … With that in mind, below is an out
 1. Input desired options or use default and choose an image from your device
 1. Begin long exposure with your camera (self timer should be enabled)
 1. When camera begins exposure, click the “Submit” button
+1. Hold iPad facing camera and shift camera to left, right and downward depending on beep noise heard
+1. Once photo completes steps, touch the screen to start over
+1. Refresh web page to use a new photo
 
-Hold iPad facing camera and listen for beeps:
+### Beeps
 
 1. Upon hearing [this beep](https://raw.githubusercontent.com/mhulse/reverse-photography/gh-pages/demo/beep1.mp3) shift ipad to left one iPad length
 1. For each beep, continue shifting iPad to left

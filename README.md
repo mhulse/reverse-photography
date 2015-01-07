@@ -1,10 +1,12 @@
 # Reverse Photography
 
-**An iPad web application used to control the display of a selectd picture which is captured via a long exposure on a stationary camera.**
+**An iPad web application used to control the display of a selected picture which is captured via a long exposure on a stationary camera.**
 
 Here are some of my initial rough tests:
 
 ![back-yard-1000](https://cloud.githubusercontent.com/assets/218624/5576131/ae6d251a-8fa7-11e4-9105-cb3237daab25.gif)
+
+![p1010742-p1010744](https://cloud.githubusercontent.com/assets/218624/5643202/5d2dfbac-960a-11e4-8ba9-6232341ee642.jpg)
 
 ![bathroom-1000](https://cloud.githubusercontent.com/assets/218624/5576132/ae6e732a-8fa7-11e4-9f5e-72df342986ce.gif)
 

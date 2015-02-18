@@ -2,7 +2,11 @@
 
 **An iPad web application used to control the display of a selected picture which is captured via a long exposure on a stationary camera.**
 
-Here are some of my initial rough tests:
+February 17, 2015 test using hand-made frame as guide:
+
+![p1010768-p1010780](https://cloud.githubusercontent.com/assets/218624/6242800/7eb5441e-b6ea-11e4-8abe-9120cc9234a3.gif)
+
+Here are some of my initial rough draft tests:
 
 ![back-yard-1000](https://cloud.githubusercontent.com/assets/218624/5576131/ae6d251a-8fa7-11e4-9105-cb3237daab25.gif)
 

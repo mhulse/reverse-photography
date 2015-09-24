@@ -39,7 +39,7 @@ This app/idea is still a work in progress … With that in mind, below is an out
 1. Take or collect photos and put on your iPad camera roll
 1. Wait for night and/or find a room/location with very little ambient light
 1. Put camera on tripod and set exposure to 30 seconds (or more) and enable the self timer
-1. [Visit my web app](http://pixelfoot.github.io/reverse-photography/demo/) using [Frameless](https://itunes.apple.com/us/app/frameless-full-screen-web/id933580264) (load page when internet is available, and then move to location for shoot)
+1. [Visit my web app](http://mhulse.github.io/reverse-photography/demo/) using [Frameless](https://itunes.apple.com/us/app/frameless-full-screen-web/id933580264) (load page when internet is available, and then move to location for shoot)
 1. Input desired options or use default and choose an image from your device
 1. Begin long exposure with your camera (self timer should be enabled)
 1. When camera begins exposure, click the “Submit” button
@@ -49,9 +49,9 @@ This app/idea is still a work in progress … With that in mind, below is an out
 
 ### Beeps
 
-1. Upon hearing [this beep](https://raw.githubusercontent.com/pixelfoot/reverse-photography/gh-pages/demo/beep1.mp3) shift ipad to left one iPad length
+1. Upon hearing [this beep](https://raw.githubusercontent.com/mhulse/reverse-photography/gh-pages/demo/beep1.mp3) shift ipad to left one iPad length
 1. For each beep, continue shifting iPad to left
-1. When you hear [this beep](https://raw.githubusercontent.com/pixelfoot/reverse-photography/gh-pages/demo/beep2.mp3) then shift the iPad down one iPad length
+1. When you hear [this beep](https://raw.githubusercontent.com/mhulse/reverse-photography/gh-pages/demo/beep2.mp3) then shift the iPad down one iPad length
 1. For odd rows, shift iPad to the left
 1. For even rows, shift iPad to the right
 
